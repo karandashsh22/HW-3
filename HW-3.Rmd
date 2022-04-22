@@ -1,0 +1,213 @@
+---
+title: "HW-3"
+author: "Hector He"
+date: "4/19/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+titanic <- read.csv('~/Desktop/Spring 2022/PSTAT 131/homework/homework-3/data/titanic.csv')
+```
+
+```{r}
+library(tidyverse)
+library(tidymodels)
+library(naivebayes)
+library(readr)
+library(discrim)
+library(magrittr)
+library(corrr)
+library(dplyr)
+library(klaR)
+```
+
+```{r}
+titanic <- titanic %>%
+  mutate(survived = factor(survived, levels = c('Yes','No'))) %>%
+  mutate(pclass = factor(pclass, levels = c('1','2','3')))
+head(titanic)
+```
+```{r}
+set.seed(2000)
+titanic_split <- initial_split(titanic, prop = 0.5, strata = survived)
+titanic_test <- testing(titanic_split)
+titanic_train <- training(titanic_split)
+```
+we stratify on 'survived' hoping that we can get equal proportion of observations from both survivers and victims
+```{r}
+head(is.na.data.frame(titanic_train), n = 12)
+```
+age and cabin number are missing for some passengers
+```{r}
+titanic_train %>% 
+  ggplot(aes(x = survived)) + geom_bar()
+```
+in the training set about 60 percent of passengers did not survive, and 30 percent survived, this should be consistent with the proportion in the entire dataset
+
+```{r}
+cor_titanic <- titanic_train %>%
+  dplyr::select(passenger_id, age, sib_sp, parch, fare) %>%
+  correlate()
+rplot(cor_titanic)
+```
+strongly positively related: number of parents/children aboard vs number of spouses/siblings aboard
+weakly positively related: number of parch/sib_sp vs fare
+some people tend to bring their entire family aboard, the more family members, the higher the fare
+strongly negatively related: number of spouses/siblings aboard vs age
+weakly negatively related: number of parents/children aboard vs age
+older people do not tend to bring their spouses/siblings/parents/children aboard
+passenger_id is not related to anything, which makes sense since it is purely random
+```{r}
+titanic_recipe <- recipe(survived ~ pclass +sex +age +sib_sp +parch +fare, data = titanic_train) %>% 
+  step_center() %>% 
+  step_scale() %>%
+  step_impute_linear() %>%
+  step_dummy(all_nominal_predictors()) %>%
+  step_interact(terms = ~ age:fare) %>% 
+  step_interact(terms = ~ starts_with('sex'):fare)
+```
+
+```{r}
+glm_titanic_train <- logistic_reg() %>% 
+  set_engine("glm") %>% 
+  set_mode("classification")
+glm_wkflow <- workflow() %>% 
+  add_model(glm_titanic_train) %>% 
+  add_recipe(titanic_recipe)
+glm_fit <- fit(glm_wkflow, titanic_train)
+glm_fit %>% 
+  extract_fit_parsnip() %>% 
+  tidy()
+```
+```{r}
+titanic_pre_glm <- predict(glm_fit, new_data = titanic_train, type = "prob")
+titanic_pre_glm <- bind_cols(titanic_pre_glm, titanic_train)
+head(titanic_pre_glm)
+```
+```{r}
+augment(glm_fit, new_data = titanic_train) %>%
+  conf_mat(truth = survived, estimate = .pred_class) 
+```
+```{r}
+glm_acc <- augment(glm_fit, new_data = titanic_train) %>%
+  accuracy(truth = survived, estimate = .pred_class)
+glm_acc
+```
+```{r}
+lda_titanic_train <- discrim_linear() %>% 
+  set_mode("classification") %>% 
+  set_engine("MASS")
+lda_wkflow <- workflow() %>% 
+  add_model(lda_titanic_train) %>% 
+  add_recipe(titanic_recipe)
+lda_fit <- fit(lda_wkflow, titanic_train)
+lda_fit %>% 
+  extract_fit_parsnip()
+```
+```{r}
+titanic_pre_lda <- predict(lda_fit, new_data = titanic_train, type = "prob")
+titanic_pre_lda <- bind_cols(titanic_pre_lda, titanic_train)
+head(titanic_pre_lda)
+```
+```{r}
+lda_acc <- augment(lda_fit, new_data = titanic_train) %>%
+  accuracy(truth = survived, estimate = .pred_class)
+lda_acc
+```
+
+```{r}
+qda_titanic_train <- discrim_quad() %>% 
+  set_mode("classification") %>% 
+  set_engine("MASS")
+qda_wkflow <- workflow() %>% 
+  add_model(qda_titanic_train) %>% 
+  add_recipe(titanic_recipe)
+qda_fit <- fit(qda_wkflow, titanic_train)
+qda_fit %>% 
+  extract_fit_parsnip()
+```
+
+```{r}
+titanic_pre_qda <- predict(qda_fit, new_data = titanic_train, type = "prob")
+titanic_pre_qda <- bind_cols(titanic_pre_qda, titanic_train)
+head(titanic_pre_qda, n = 7)
+```
+
+```{r}
+qda_acc <- augment(glm_fit, new_data = titanic_train) %>%
+  accuracy(truth = survived, estimate = .pred_class)
+qda_acc
+```
+
+```{r}
+nbayes_titanic_train <- naive_Bayes() %>% 
+  set_mode("classification") %>% 
+  set_engine("klaR") %>% 
+  set_args(usekernel = FALSE) 
+nbayes_wkflow <- workflow() %>% 
+  add_model(nbayes_titanic_train) %>% 
+  add_recipe(titanic_recipe)
+nbayes_fit <- fit(nbayes_wkflow, titanic_train)
+nbayes_fit %>% 
+  extract_fit_parsnip()
+```
+
+```{r}
+library(e1071)
+nbayes_fit <- naiveBayes(survived ~ pclass +sex +age +sib_sp +parch +fare, data = titanic_train)
+nbayes_fit
+```
+
+```{r}
+titanic_pre_nbayes <- predict(nbayes_fit, new_data = titanic_train, type = "prob")
+titanic_pre_nbayes <- bind_cols(titanic_pre_nbayes, titanic_train)
+head(titanic_pre_nbayes)
+```
+
+```{r}
+pre_accuracies <- c(glm_acc$.estimate, lda_acc$.estimate, qda_acc$.estimate)
+pre_models <- c("Logistic Regression", "LDA", "QDA")
+pre_results <- tibble(accuracies = pre_accuracies, models = pre_models)
+pre_results %>% 
+  arrange(-accuracies)
+```
+
+```{r}
+predict(lda_fit, new_data = titanic_test, type = "prob")
+```
+
+```{r}
+augment(lda_fit, new_data = titanic_test) %>%
+  conf_mat(truth = survived, estimate = .pred_class) 
+```
+```{r}
+multi_metric <- metric_set(accuracy, sensitivity, specificity)
+augment(lda_fit, new_data = titanic_test) %>%
+  multi_metric(truth = sruvived, estimate = .pred_class)
+```
+```{r}
+augment(lda_fit, new_data = titanic_test) %>%
+  roc_curve(survived, .pred_No) %>%
+  autoplot()
+```
+```{r}
+lda_acc_test <- augment(lda_fit, new_data = titanic_test) %>%
+  accuracy(truth = survived, estimate = .pred_class)
+lda_acc_test
+```
+only 78.9 % accuracy for the testing set compared with the 83.5 % accuracy in the training set, slightly less, but still within +- 5%
+
+
+
+
+
+
+
+
+
+
+
