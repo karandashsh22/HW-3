@@ -25,6 +25,7 @@ library(dplyr)
 library(klaR)
 ```
 
+
 ```{r}
 titanic <- titanic %>%
   mutate(survived = factor(survived, levels = c('Yes','No'))) %>%
@@ -61,14 +62,15 @@ strongly negatively related: number of spouses/siblings aboard vs age
 weakly negatively related: number of parents/children aboard vs age
 older people do not tend to bring their spouses/siblings/parents/children aboard
 passenger_id is not related to anything, which makes sense since it is purely random
+
 ```{r}
 titanic_recipe <- recipe(survived ~ pclass +sex +age +sib_sp +parch +fare, data = titanic_train) %>% 
-  step_center() %>% 
-  step_scale() %>%
-  step_impute_linear() %>%
+  step_impute_linear(age, impute_with = imp_vars(pclass, fare)) %>%
   step_dummy(all_nominal_predictors()) %>%
   step_interact(terms = ~ age:fare) %>% 
-  step_interact(terms = ~ starts_with('sex'):fare)
+  step_interact(terms = ~ starts_with('sex'):fare) %>% 
+  step_center(all_predictors()) %>% 
+  step_scale(all_predictors()) 
 ```
 
 ```{r}
@@ -117,6 +119,10 @@ head(titanic_pre_lda)
 lda_acc <- augment(lda_fit, new_data = titanic_train) %>%
   accuracy(truth = survived, estimate = .pred_class)
 lda_acc
+```
+```{r}
+augment(lda_fit, new_data = titanic_train) %>%
+  conf_mat(truth = survived, estimate = .pred_class) 
 ```
 
 ```{r}
@@ -177,29 +183,29 @@ pre_results %>%
 ```
 
 ```{r}
-predict(lda_fit, new_data = titanic_test, type = "prob")
+predict(qda_fit, new_data = titanic_test, type = "prob")
 ```
 
 ```{r}
-augment(lda_fit, new_data = titanic_test) %>%
+augment(qda_fit, new_data = titanic_test) %>%
   conf_mat(truth = survived, estimate = .pred_class) 
 ```
 ```{r}
 multi_metric <- metric_set(accuracy, sensitivity, specificity)
-augment(lda_fit, new_data = titanic_test) %>%
-  multi_metric(truth = sruvived, estimate = .pred_class)
+augment(qda_fit, new_data = titanic_test) %>%
+  multi_metric(truth = survived, estimate = .pred_class)
 ```
 ```{r}
-augment(lda_fit, new_data = titanic_test) %>%
+augment(qda_fit, new_data = titanic_test) %>%
   roc_curve(survived, .pred_No) %>%
   autoplot()
 ```
 ```{r}
-lda_acc_test <- augment(lda_fit, new_data = titanic_test) %>%
+qda_acc_test <- augment(qda_fit, new_data = titanic_test) %>%
   accuracy(truth = survived, estimate = .pred_class)
-lda_acc_test
+qda_acc_test
 ```
-only 78.9 % accuracy for the testing set compared with the 83.5 % accuracy in the training set, slightly less, but still within +- 5%
+only 76.7 % accuracy for the testing set compared with the 83.5 % accuracy in the training set
 
 
 
