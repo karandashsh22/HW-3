@@ -1,0 +1,1151 @@
+\PassOptionsToPackage{unicode=true}{hyperref} % options for packages loaded elsewhere
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provides euro and other symbols
+\else % if luatex or xelatex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage[]{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\usepackage{hyperref}
+\hypersetup{
+            pdftitle={HW-3},
+            pdfauthor={Hector He},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+% set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+
+\title{HW-3}
+\author{Hector He}
+\date{4/19/2022}
+
+\begin{document}
+\maketitle
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{titanic <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{'~/Desktop/Spring 2022/PSTAT 131/homework/homework-3/data/titanic.csv'}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(klaR)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: MASS
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## -- Attaching packages --------------------------------------- tidyverse 1.3.1 --
+\end{verbatim}
+
+\begin{verbatim}
+## v ggplot2 3.3.5     v purrr   0.3.4
+## v tibble  3.1.6     v dplyr   1.0.8
+## v tidyr   1.2.0     v stringr 1.4.0
+## v readr   2.1.2     v forcats 0.5.1
+\end{verbatim}
+
+\begin{verbatim}
+## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+## x dplyr::select() masks MASS::select()
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tidymodels)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## -- Attaching packages -------------------------------------- tidymodels 0.2.0 --
+\end{verbatim}
+
+\begin{verbatim}
+## v broom        0.8.0     v rsample      0.1.1
+## v dials        0.1.1     v tune         0.2.0
+## v infer        1.0.0     v workflows    0.2.6
+## v modeldata    0.1.1     v workflowsets 0.2.1
+## v parsnip      0.2.1     v yardstick    0.0.9
+## v recipes      0.2.0
+\end{verbatim}
+
+\begin{verbatim}
+## -- Conflicts ----------------------------------------- tidymodels_conflicts() --
+## x scales::discard() masks purrr::discard()
+## x dplyr::filter()   masks stats::filter()
+## x recipes::fixed()  masks stringr::fixed()
+## x dplyr::lag()      masks stats::lag()
+## x dplyr::select()   masks MASS::select()
+## x yardstick::spec() masks readr::spec()
+## x recipes::step()   masks stats::step()
+## * Search for functions across packages at https://www.tidymodels.org/find/
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(naivebayes)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## naivebayes 0.9.7 loaded
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(readr)}
+\KeywordTok{library}\NormalTok{(discrim)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'discrim'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:dials':
+## 
+##     smoothness
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(magrittr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'magrittr'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:purrr':
+## 
+##     set_names
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:tidyr':
+## 
+##     extract
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(corrr)}
+\KeywordTok{library}\NormalTok{(dplyr)}
+\end{Highlighting}
+\end{Shaded}
+
+Q1
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{titanic <-}\StringTok{ }\NormalTok{titanic }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{survived =} \KeywordTok{factor}\NormalTok{(survived, }\DataTypeTok{levels =} \KeywordTok{c}\NormalTok{(}\StringTok{'Yes'}\NormalTok{,}\StringTok{'No'}\NormalTok{))) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{pclass =} \KeywordTok{factor}\NormalTok{(pclass, }\DataTypeTok{levels =} \KeywordTok{c}\NormalTok{(}\StringTok{'1'}\NormalTok{,}\StringTok{'2'}\NormalTok{,}\StringTok{'3'}\NormalTok{)))}
+\KeywordTok{head}\NormalTok{(titanic)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   passenger_id survived pclass
+## 1            1       No      3
+## 2            2      Yes      1
+## 3            3      Yes      3
+## 4            4      Yes      1
+## 5            5       No      3
+## 6            6       No      3
+##                                                  name    sex age sib_sp parch
+## 1                             Braund, Mr. Owen Harris   male  22      1     0
+## 2 Cumings, Mrs. John Bradley (Florence Briggs Thayer) female  38      1     0
+## 3                              Heikkinen, Miss. Laina female  26      0     0
+## 4        Futrelle, Mrs. Jacques Heath (Lily May Peel) female  35      1     0
+## 5                            Allen, Mr. William Henry   male  35      0     0
+## 6                                    Moran, Mr. James   male  NA      0     0
+##             ticket    fare cabin embarked
+## 1        A/5 21171  7.2500  <NA>        S
+## 2         PC 17599 71.2833   C85        C
+## 3 STON/O2. 3101282  7.9250  <NA>        S
+## 4           113803 53.1000  C123        S
+## 5           373450  8.0500  <NA>        S
+## 6           330877  8.4583  <NA>        Q
+\end{verbatim}
+
+Q2
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{2000}\NormalTok{)}
+\NormalTok{titanic_split <-}\StringTok{ }\KeywordTok{initial_split}\NormalTok{(titanic, }\DataTypeTok{prop =} \FloatTok{0.5}\NormalTok{, }\DataTypeTok{strata =}\NormalTok{ survived)}
+\NormalTok{titanic_test <-}\StringTok{ }\KeywordTok{testing}\NormalTok{(titanic_split)}
+\NormalTok{titanic_train <-}\StringTok{ }\KeywordTok{training}\NormalTok{(titanic_split)}
+\end{Highlighting}
+\end{Shaded}
+
+we stratify on `survived' hoping that we can get equal proportion of
+observations from both survivers and victims
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{head}\NormalTok{(}\KeywordTok{is.na.data.frame}\NormalTok{(titanic_train), }\DataTypeTok{n =} \DecValTok{12}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    passenger_id survived pclass  name   sex   age sib_sp parch ticket  fare
+## 1         FALSE    FALSE  FALSE FALSE FALSE FALSE  FALSE FALSE  FALSE FALSE
+## 5         FALSE    FALSE  FALSE FALSE FALSE FALSE  FALSE FALSE  FALSE FALSE
+## 7         FALSE    FALSE  FALSE FALSE FALSE FALSE  FALSE FALSE  FALSE FALSE
+## 13        FALSE    FALSE  FALSE FALSE FALSE FALSE  FALSE FALSE  FALSE FALSE
+## 14        FALSE    FALSE  FALSE FALSE FALSE FALSE  FALSE FALSE  FALSE FALSE
+## 19        FALSE    FALSE  FALSE FALSE FALSE FALSE  FALSE FALSE  FALSE FALSE
+## 25        FALSE    FALSE  FALSE FALSE FALSE FALSE  FALSE FALSE  FALSE FALSE
+## 27        FALSE    FALSE  FALSE FALSE FALSE  TRUE  FALSE FALSE  FALSE FALSE
+## 28        FALSE    FALSE  FALSE FALSE FALSE FALSE  FALSE FALSE  FALSE FALSE
+## 30        FALSE    FALSE  FALSE FALSE FALSE  TRUE  FALSE FALSE  FALSE FALSE
+## 31        FALSE    FALSE  FALSE FALSE FALSE FALSE  FALSE FALSE  FALSE FALSE
+## 34        FALSE    FALSE  FALSE FALSE FALSE FALSE  FALSE FALSE  FALSE FALSE
+##    cabin embarked
+## 1   TRUE    FALSE
+## 5   TRUE    FALSE
+## 7  FALSE    FALSE
+## 13  TRUE    FALSE
+## 14  TRUE    FALSE
+## 19  TRUE    FALSE
+## 25  TRUE    FALSE
+## 27  TRUE    FALSE
+## 28 FALSE    FALSE
+## 30  TRUE    FALSE
+## 31  TRUE    FALSE
+## 34  TRUE    FALSE
+\end{verbatim}
+
+age and cabin number are missing for some passengers
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{titanic_train }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ survived)) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_bar}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{HW-3_files/figure-latex/unnamed-chunk-6-1.pdf} in the
+training set about 60 percent of passengers did not survive, and 30
+percent survived, this should be consistent with the proportion in the
+entire dataset
+
+Q3
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cor_titanic <-}\StringTok{ }\NormalTok{titanic_train }\OperatorTok{%>%}
+\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{select}\NormalTok{(passenger_id, age, sib_sp, parch, fare) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{correlate}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Correlation method: 'pearson'
+## Missing treated using: 'pairwise.complete.obs'
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{rplot}\NormalTok{(cor_titanic)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Don't know how to automatically pick scale for object of type noquote. Defaulting to continuous.
+\end{verbatim}
+
+\includegraphics{HW-3_files/figure-latex/unnamed-chunk-7-1.pdf} strongly
+positively related: number of parents/children aboard vs number of
+spouses/siblings aboard weakly positively related: number of
+parch/sib\_sp vs fare some people tend to bring their entire family
+aboard, the more family members, the higher the fare strongly negatively
+related: number of spouses/siblings aboard vs age weakly negatively
+related: number of parents/children aboard vs age older people do not
+tend to bring their spouses/siblings/parents/children aboard
+passenger\_id is not related to anything, which makes sense since it is
+purely random
+
+Q4
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{titanic_recipe <-}\StringTok{ }\KeywordTok{recipe}\NormalTok{(survived }\OperatorTok{~}\StringTok{ }\NormalTok{pclass }\OperatorTok{+}\NormalTok{sex }\OperatorTok{+}\NormalTok{age }\OperatorTok{+}\NormalTok{sib_sp }\OperatorTok{+}\NormalTok{parch }\OperatorTok{+}\NormalTok{fare, }\DataTypeTok{data =}\NormalTok{ titanic_train) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{step_impute_linear}\NormalTok{(age, }\DataTypeTok{impute_with =} \KeywordTok{imp_vars}\NormalTok{(pclass, fare)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{step_dummy}\NormalTok{(}\KeywordTok{all_nominal_predictors}\NormalTok{()) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{step_interact}\NormalTok{(}\DataTypeTok{terms =} \OperatorTok{~}\StringTok{ }\NormalTok{age}\OperatorTok{:}\NormalTok{fare) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{step_interact}\NormalTok{(}\DataTypeTok{terms =} \OperatorTok{~}\StringTok{ }\KeywordTok{starts_with}\NormalTok{(}\StringTok{'sex'}\NormalTok{)}\OperatorTok{:}\NormalTok{fare) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{step_center}\NormalTok{(}\KeywordTok{all_predictors}\NormalTok{()) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{step_scale}\NormalTok{(}\KeywordTok{all_predictors}\NormalTok{()) }
+\end{Highlighting}
+\end{Shaded}
+
+Q5
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{glm_titanic_train <-}\StringTok{ }\KeywordTok{logistic_reg}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{set_engine}\NormalTok{(}\StringTok{"glm"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{set_mode}\NormalTok{(}\StringTok{"classification"}\NormalTok{)}
+\NormalTok{glm_wkflow <-}\StringTok{ }\KeywordTok{workflow}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{add_model}\NormalTok{(glm_titanic_train) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{add_recipe}\NormalTok{(titanic_recipe)}
+\NormalTok{glm_fit <-}\StringTok{ }\KeywordTok{fit}\NormalTok{(glm_wkflow, titanic_train)}
+\NormalTok{glm_fit }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{extract_fit_parsnip}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{tidy}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 10 x 5
+##    term            estimate std.error statistic  p.value
+##    <chr>              <dbl>     <dbl>     <dbl>    <dbl>
+##  1 (Intercept)       0.654      0.152     4.30  1.70e- 5
+##  2 age               0.615      0.188     3.27  1.07e- 3
+##  3 sib_sp            0.740      0.215     3.44  5.86e- 4
+##  4 parch             0.0409     0.139     0.293 7.69e- 1
+##  5 fare             -0.252      0.655    -0.385 7.00e- 1
+##  6 pclass_X2         0.436      0.174     2.50  1.23e- 2
+##  7 pclass_X3         1.32       0.222     5.92  3.16e- 9
+##  8 sex_male          1.25       0.178     7.04  1.96e-12
+##  9 age_x_fare       -0.305      0.425    -0.719 4.72e- 1
+## 10 sex_male_x_fare   0.433      0.425     1.02  3.08e- 1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{titanic_pre_glm <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(glm_fit, }\DataTypeTok{new_data =}\NormalTok{ titanic_train, }\DataTypeTok{type =} \StringTok{"prob"}\NormalTok{)}
+\NormalTok{titanic_pre_glm <-}\StringTok{ }\KeywordTok{bind_cols}\NormalTok{(titanic_pre_glm, titanic_train)}
+\KeywordTok{head}\NormalTok{(titanic_pre_glm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 14
+##   .pred_Yes .pred_No passenger_id survived pclass name  sex     age sib_sp parch
+##       <dbl>    <dbl>        <int> <fct>    <fct>  <fct> <fct> <dbl>  <int> <int>
+## 1    0.0620    0.938            1 No       3      Brau~ male     22      1     0
+## 2    0.0671    0.933            5 No       3      Alle~ male     35      0     0
+## 3    0.324     0.676            7 No       1      McCa~ male     54      0     0
+## 4    0.127     0.873           13 No       3      Saun~ male     20      0     0
+## 5    0.0234    0.977           14 No       3      Ande~ male     39      1     5
+## 6    0.406     0.594           19 No       3      Vand~ fema~    31      1     0
+## # ... with 4 more variables: ticket <fct>, fare <dbl>, cabin <fct>,
+## #   embarked <fct>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{augment}\NormalTok{(glm_fit, }\DataTypeTok{new_data =}\NormalTok{ titanic_train) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{conf_mat}\NormalTok{(}\DataTypeTok{truth =}\NormalTok{ survived, }\DataTypeTok{estimate =}\NormalTok{ .pred_class) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##           Truth
+## Prediction Yes  No
+##        Yes 125  30
+##        No   46 244
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{glm_acc <-}\StringTok{ }\KeywordTok{augment}\NormalTok{(glm_fit, }\DataTypeTok{new_data =}\NormalTok{ titanic_train) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{accuracy}\NormalTok{(}\DataTypeTok{truth =}\NormalTok{ survived, }\DataTypeTok{estimate =}\NormalTok{ .pred_class)}
+\NormalTok{glm_acc}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1 x 3
+##   .metric  .estimator .estimate
+##   <chr>    <chr>          <dbl>
+## 1 accuracy binary         0.829
+\end{verbatim}
+
+Q6
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{lda_titanic_train <-}\StringTok{ }\KeywordTok{discrim_linear}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{set_mode}\NormalTok{(}\StringTok{"classification"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{set_engine}\NormalTok{(}\StringTok{"MASS"}\NormalTok{)}
+\NormalTok{lda_wkflow <-}\StringTok{ }\KeywordTok{workflow}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{add_model}\NormalTok{(lda_titanic_train) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{add_recipe}\NormalTok{(titanic_recipe)}
+\NormalTok{lda_fit <-}\StringTok{ }\KeywordTok{fit}\NormalTok{(lda_wkflow, titanic_train)}
+\NormalTok{lda_fit }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{extract_fit_parsnip}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## parsnip model object
+## 
+## Call:
+## lda(..y ~ ., data = data)
+## 
+## Prior probabilities of groups:
+##       Yes        No 
+## 0.3842697 0.6157303 
+## 
+## Group means:
+##             age      sib_sp      parch       fare   pclass_X2  pclass_X3
+## Yes -0.02600955 -0.08654034  0.1068453  0.3077586  0.15568005 -0.4972012
+## No   0.01623224  0.05400875 -0.0666808 -0.1920683 -0.09715799  0.3102971
+##       sex_male age_x_fare sex_male_x_fare
+## Yes -0.6712508  0.2645714     -0.05428802
+## No   0.4189193 -0.1651157      0.03388048
+## 
+## Coefficients of linear discriminants:
+##                         LD1
+## age              0.34311950
+## sib_sp           0.27719370
+## parch            0.04934621
+## fare             0.05677430
+## pclass_X2        0.29534702
+## pclass_X3        0.86017787
+## sex_male         0.96229648
+## age_x_fare      -0.13942486
+## sex_male_x_fare  0.02913520
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{titanic_pre_lda <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(lda_fit, }\DataTypeTok{new_data =}\NormalTok{ titanic_train, }\DataTypeTok{type =} \StringTok{"prob"}\NormalTok{)}
+\NormalTok{titanic_pre_lda <-}\StringTok{ }\KeywordTok{bind_cols}\NormalTok{(titanic_pre_lda, titanic_train)}
+\KeywordTok{head}\NormalTok{(titanic_pre_lda)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 14
+##   .pred_Yes .pred_No passenger_id survived pclass name  sex     age sib_sp parch
+##       <dbl>    <dbl>        <int> <fct>    <fct>  <fct> <fct> <dbl>  <int> <int>
+## 1    0.0430    0.957            1 No       3      Brau~ male     22      1     0
+## 2    0.0375    0.963            5 No       3      Alle~ male     35      0     0
+## 3    0.280     0.720            7 No       1      McCa~ male     54      0     0
+## 4    0.0722    0.928           13 No       3      Saun~ male     20      0     0
+## 5    0.0127    0.987           14 No       3      Ande~ male     39      1     5
+## 6    0.500     0.500           19 No       3      Vand~ fema~    31      1     0
+## # ... with 4 more variables: ticket <fct>, fare <dbl>, cabin <fct>,
+## #   embarked <fct>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{lda_acc <-}\StringTok{ }\KeywordTok{augment}\NormalTok{(lda_fit, }\DataTypeTok{new_data =}\NormalTok{ titanic_train) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{accuracy}\NormalTok{(}\DataTypeTok{truth =}\NormalTok{ survived, }\DataTypeTok{estimate =}\NormalTok{ .pred_class)}
+\NormalTok{lda_acc}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1 x 3
+##   .metric  .estimator .estimate
+##   <chr>    <chr>          <dbl>
+## 1 accuracy binary         0.822
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{augment}\NormalTok{(lda_fit, }\DataTypeTok{new_data =}\NormalTok{ titanic_train) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{conf_mat}\NormalTok{(}\DataTypeTok{truth =}\NormalTok{ survived, }\DataTypeTok{estimate =}\NormalTok{ .pred_class) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##           Truth
+## Prediction Yes  No
+##        Yes 125  33
+##        No   46 241
+\end{verbatim}
+
+Q7
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{qda_titanic_train <-}\StringTok{ }\KeywordTok{discrim_quad}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{set_mode}\NormalTok{(}\StringTok{"classification"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{set_engine}\NormalTok{(}\StringTok{"MASS"}\NormalTok{)}
+\NormalTok{qda_wkflow <-}\StringTok{ }\KeywordTok{workflow}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{add_model}\NormalTok{(qda_titanic_train) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{add_recipe}\NormalTok{(titanic_recipe)}
+\NormalTok{qda_fit <-}\StringTok{ }\KeywordTok{fit}\NormalTok{(qda_wkflow, titanic_train)}
+\NormalTok{qda_fit }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{extract_fit_parsnip}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## parsnip model object
+## 
+## Call:
+## qda(..y ~ ., data = data)
+## 
+## Prior probabilities of groups:
+##       Yes        No 
+## 0.3842697 0.6157303 
+## 
+## Group means:
+##             age      sib_sp      parch       fare   pclass_X2  pclass_X3
+## Yes -0.02600955 -0.08654034  0.1068453  0.3077586  0.15568005 -0.4972012
+## No   0.01623224  0.05400875 -0.0666808 -0.1920683 -0.09715799  0.3102971
+##       sex_male age_x_fare sex_male_x_fare
+## Yes -0.6712508  0.2645714     -0.05428802
+## No   0.4189193 -0.1651157      0.03388048
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{titanic_pre_qda <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(qda_fit, }\DataTypeTok{new_data =}\NormalTok{ titanic_train, }\DataTypeTok{type =} \StringTok{"prob"}\NormalTok{)}
+\NormalTok{titanic_pre_qda <-}\StringTok{ }\KeywordTok{bind_cols}\NormalTok{(titanic_pre_qda, titanic_train)}
+\KeywordTok{head}\NormalTok{(titanic_pre_qda, }\DataTypeTok{n =} \DecValTok{7}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 7 x 14
+##   .pred_Yes .pred_No passenger_id survived pclass name  sex     age sib_sp parch
+##       <dbl>    <dbl>        <int> <fct>    <fct>  <fct> <fct> <dbl>  <int> <int>
+## 1   2.76e-3    0.997            1 No       3      Brau~ male     22      1     0
+## 2   5.80e-3    0.994            5 No       3      Alle~ male     35      0     0
+## 3   2.53e-1    0.747            7 No       1      McCa~ male     54      0     0
+## 4   9.14e-3    0.991           13 No       3      Saun~ male     20      0     0
+## 5   8.90e-5    1.00            14 No       3      Ande~ male     39      1     5
+## 6   1.36e-1    0.864           19 No       3      Vand~ fema~    31      1     0
+## 7   8.95e-6    1.00            25 No       3      Pals~ fema~     8      3     1
+## # ... with 4 more variables: ticket <fct>, fare <dbl>, cabin <fct>,
+## #   embarked <fct>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{qda_acc <-}\StringTok{ }\KeywordTok{augment}\NormalTok{(glm_fit, }\DataTypeTok{new_data =}\NormalTok{ titanic_train) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{accuracy}\NormalTok{(}\DataTypeTok{truth =}\NormalTok{ survived, }\DataTypeTok{estimate =}\NormalTok{ .pred_class)}
+\NormalTok{qda_acc}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1 x 3
+##   .metric  .estimator .estimate
+##   <chr>    <chr>          <dbl>
+## 1 accuracy binary         0.829
+\end{verbatim}
+
+Q8
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{nbayes_titanic_train <-}\StringTok{ }\KeywordTok{naive_Bayes}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{set_mode}\NormalTok{(}\StringTok{"classification"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{set_engine}\NormalTok{(}\StringTok{"klaR"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{set_args}\NormalTok{(}\DataTypeTok{usekernel =} \OtherTok{FALSE}\NormalTok{) }
+\NormalTok{nbayes_wkflow <-}\StringTok{ }\KeywordTok{workflow}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{add_model}\NormalTok{(nbayes_titanic_train) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{add_recipe}\NormalTok{(titanic_recipe)}
+\NormalTok{nbayes_fit <-}\StringTok{ }\KeywordTok{fit}\NormalTok{(nbayes_wkflow, titanic_train)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{titanic_pre_nbayes <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(nbayes_fit, }\DataTypeTok{new_data =}\NormalTok{ titanic_train, }\DataTypeTok{type =} \StringTok{"prob"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 5
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 9
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 27
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 42
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 43
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 70
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 77
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 119
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 136
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 169
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 189
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 207
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 260
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 273
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 331
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 333
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 341
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 363
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 404
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 419
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 424
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{titanic_pre_nbayes <-}\StringTok{ }\KeywordTok{bind_cols}\NormalTok{(titanic_pre_nbayes, titanic_train)}
+\KeywordTok{head}\NormalTok{(titanic_pre_nbayes, }\DataTypeTok{n =} \DecValTok{7}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 7 x 14
+##   .pred_Yes .pred_No passenger_id survived pclass name  sex     age sib_sp parch
+##       <dbl>    <dbl>        <int> <fct>    <fct>  <fct> <fct> <dbl>  <int> <int>
+## 1  0.0101      0.990            1 No       3      Brau~ male     22      1     0
+## 2  0.0125      0.988            5 No       3      Alle~ male     35      0     0
+## 3  0.489       0.511            7 No       1      McCa~ male     54      0     0
+## 4  0.0141      0.986           13 No       3      Saun~ male     20      0     0
+## 5  0.000192    1.00            14 No       3      Ande~ male     39      1     5
+## 6  0.213       0.787           19 No       3      Vand~ fema~    31      1     0
+## 7  0.000430    1.00            25 No       3      Pals~ fema~     8      3     1
+## # ... with 4 more variables: ticket <fct>, fare <dbl>, cabin <fct>,
+## #   embarked <fct>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{nbayes_acc <-}\StringTok{ }\KeywordTok{augment}\NormalTok{(nbayes_fit, }\DataTypeTok{new_data =}\NormalTok{ titanic_train) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{accuracy}\NormalTok{(}\DataTypeTok{truth =}\NormalTok{ survived, }\DataTypeTok{estimate =}\NormalTok{ .pred_class)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 5
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 9
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 27
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 42
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 43
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 70
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 77
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 119
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 136
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 169
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 189
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 207
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 260
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 273
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 331
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 333
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 341
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 363
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 404
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 419
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 424
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 5
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 9
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 27
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 42
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 43
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 70
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 77
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 119
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 136
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 169
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 189
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 207
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 260
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 273
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 331
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 333
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 341
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 363
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 404
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 419
+\end{verbatim}
+
+\begin{verbatim}
+## Warning in FUN(X[[i]], ...): Numerical 0 probability for all classes with
+## observation 424
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{nbayes_acc}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1 x 3
+##   .metric  .estimator .estimate
+##   <chr>    <chr>          <dbl>
+## 1 accuracy binary         0.791
+\end{verbatim}
+
+Q9
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pre_accuracies <-}\StringTok{ }\KeywordTok{c}\NormalTok{(glm_acc}\OperatorTok{$}\NormalTok{.estimate, lda_acc}\OperatorTok{$}\NormalTok{.estimate, qda_acc}\OperatorTok{$}\NormalTok{.estimate, nbayes_acc}\OperatorTok{$}\NormalTok{.estimate)}
+\NormalTok{pre_models <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Logistic Regression"}\NormalTok{, }\StringTok{"LDA"}\NormalTok{, }\StringTok{"QDA"}\NormalTok{, }\StringTok{"Naive Bayes"}\NormalTok{)}
+\NormalTok{pre_results <-}\StringTok{ }\KeywordTok{tibble}\NormalTok{(}\DataTypeTok{accuracies =}\NormalTok{ pre_accuracies, }\DataTypeTok{models =}\NormalTok{ pre_models)}
+\NormalTok{pre_results }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{arrange}\NormalTok{(}\OperatorTok{-}\NormalTok{accuracies)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 4 x 2
+##   accuracies models             
+##        <dbl> <chr>              
+## 1      0.829 Logistic Regression
+## 2      0.829 QDA                
+## 3      0.822 LDA                
+## 4      0.791 Naive Bayes
+\end{verbatim}
+
+it seems that Logistic Regression achieved highest level of accuracy on
+the training data
+
+Q10
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{predict}\NormalTok{(glm_fit, }\DataTypeTok{new_data =}\NormalTok{ titanic_test, }\DataTypeTok{type =} \StringTok{"prob"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 446 x 2
+##    .pred_Yes .pred_No
+##        <dbl>    <dbl>
+##  1    0.919    0.0810
+##  2    0.0998   0.900 
+##  3    0.0363   0.964 
+##  4    0.736    0.264 
+##  5    0.0178   0.982 
+##  6    0.299    0.701 
+##  7    0.260    0.740 
+##  8    0.267    0.733 
+##  9    0.727    0.273 
+## 10    0.580    0.420 
+## # ... with 436 more rows
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{augment}\NormalTok{(glm_fit, }\DataTypeTok{new_data =}\NormalTok{ titanic_test) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{conf_mat}\NormalTok{(}\DataTypeTok{truth =}\NormalTok{ survived, }\DataTypeTok{estimate =}\NormalTok{ .pred_class) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##           Truth
+## Prediction Yes  No
+##        Yes 107  23
+##        No   64 252
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{multi_metric <-}\StringTok{ }\KeywordTok{metric_set}\NormalTok{(accuracy, sensitivity, specificity)}
+\KeywordTok{augment}\NormalTok{(glm_fit, }\DataTypeTok{new_data =}\NormalTok{ titanic_test) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{multi_metric}\NormalTok{(}\DataTypeTok{truth =}\NormalTok{ survived, }\DataTypeTok{estimate =}\NormalTok{ .pred_class)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 3 x 3
+##   .metric     .estimator .estimate
+##   <chr>       <chr>          <dbl>
+## 1 accuracy    binary         0.805
+## 2 sensitivity binary         0.626
+## 3 specificity binary         0.916
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{augment}\NormalTok{(glm_fit, }\DataTypeTok{new_data =}\NormalTok{ titanic_test) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{roc_curve}\NormalTok{(survived, .pred_No) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{autoplot}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{HW-3_files/figure-latex/unnamed-chunk-27-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{glm_acc_test <-}\StringTok{ }\KeywordTok{augment}\NormalTok{(glm_fit, }\DataTypeTok{new_data =}\NormalTok{ titanic_test) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{accuracy}\NormalTok{(}\DataTypeTok{truth =}\NormalTok{ survived, }\DataTypeTok{estimate =}\NormalTok{ .pred_class)}
+\NormalTok{glm_acc_test}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1 x 3
+##   .metric  .estimator .estimate
+##   <chr>    <chr>          <dbl>
+## 1 accuracy binary         0.805
+\end{verbatim}
+
+80.5 \% accuracy for the testing set compared with the 82.9 \% accuracy
+in the training set, still acceptable (worth noting that though QDA has
+the same level of accuracy on the training set, it has a comparatively
+way lower accurary on the test set)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(yardstick)}
+\KeywordTok{augment}\NormalTok{(glm_fit, }\DataTypeTok{new_data =}\NormalTok{ titanic_test) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{roc_auc}\NormalTok{(survived, .pred_No)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 1 x 3
+##   .metric .estimator .estimate
+##   <chr>   <chr>          <dbl>
+## 1 roc_auc binary         0.167
+\end{verbatim}
+
+\end{document}
